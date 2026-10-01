@@ -301,6 +301,28 @@
     bottom: auto !important;
 }
 
+
+/* Keybinds: keep Open Menu and its assigned key on one line */
+#list-stack #live-list-Keybinds{
+    width:19vh !important;
+    min-width:19vh !important;
+}
+#list-stack #live-list-Keybinds .cf-row{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:1vh !important;
+    white-space:nowrap !important;
+}
+#list-stack #live-list-Keybinds .cf-row > span:first-child{
+    white-space:nowrap !important;
+    flex:1 1 auto !important;
+}
+#list-stack #live-list-Keybinds .cf-row .cf-v{
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
+}
+
 </style>
 <style>
 /* cleaner bottom-right counter */
@@ -1602,6 +1624,8 @@ function stack(c){
 
  var kb=document.getElementById('live-list-Keybinds');
  if(kb){
+  kb.style.setProperty('width','19vh','important');
+  kb.style.setProperty('min-width','19vh','important');
   kb.style.setProperty('position','fixed','important');
   kb.style.setProperty('top','5vh','important');
   kb.style.setProperty('left','5vh','important');
