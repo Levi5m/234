@@ -1645,8 +1645,47 @@ function stack(c){
  });
 }
 var _c=window.createLiveList,_u=window.updateLiveList;
-window.createLiveList=function(data){_c(data);if(data&&CF.indexOf(data.id)>-1){var c=document.getElementById('live-list-'+data.id);if(c){c.__cf={header:data.header||'List',icon:data.icon,items:data.items||[]};render(c);stack(c)}}};
-window.updateLiveList=function(data){_u(data);if(data&&CF.indexOf(data.id)>-1){var c=document.getElementById('live-list-'+data.id);if(c&&c.__cf){if(data.header)c.__cf.header=data.header;if(data.icon!==undefined)c.__cf.icon=data.icon;if(data.items!==undefined)c.__cf.items=data.items;render(c)}}};
+window.createLiveList=function(data){
+ if(data&&data.id==='Keybinds'&&Array.isArray(data.items)){
+  data=Object.assign({},data,{items:data.items.map(function(item,index){
+   var x=Object.assign({},item);
+   if(index===0 || x.label==='Open Menu' || x.label==='Open Menu'){
+    x.label='Open Menu';
+   }
+   return x;
+  })});
+ }
+ _c(data);
+ if(data&&CF.indexOf(data.id)>-1){
+  var c=document.getElementById('live-list-'+data.id);
+  if(c){
+   c.__cf={header:data.header||'List',icon:data.icon,items:data.items||[]};
+   render(c);
+   stack(c);
+  }
+ }
+};
+window.updateLiveList=function(data){
+ if(data&&data.id==='Keybinds'&&Array.isArray(data.items)){
+  data=Object.assign({},data,{items:data.items.map(function(item,index){
+   var x=Object.assign({},item);
+   if(index===0 || x.label==='Open Menu' || x.label==='Open Menu'){
+    x.label='Open Menu';
+   }
+   return x;
+  })});
+ }
+ _u(data);
+ if(data&&CF.indexOf(data.id)>-1){
+  var c=document.getElementById('live-list-'+data.id);
+  if(c&&c.__cf){
+   if(data.header)c.__cf.header=data.header;
+   if(data.icon!==undefined)c.__cf.icon=data.icon;
+   if(data.items!==undefined)c.__cf.items=data.items;
+   render(c);
+  }
+ }
+};
 // input box: clara look (text + blinking caret mirrored from the real field)
 var f=document.getElementById('input-field'),m=document.getElementById('input-mirror'),dlg=document.getElementById('input-dialog');
 document.querySelector('.ib-ic').innerHTML=lucideIconSvg('keyboard');
